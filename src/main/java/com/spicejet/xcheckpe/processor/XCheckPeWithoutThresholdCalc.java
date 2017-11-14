@@ -5,13 +5,14 @@ import com.spicejet.xcheckpe.model.OutputBook;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.ParseException;
+import java.util.List;
 
 import static com.spicejet.xcheckpe.util.CommonUtil.addToCalender;
 
 public class XCheckPeWithoutThresholdCalc implements ICalculation {
 
     @Override
-    public void execute(InputBook inputBook, OutputBook outputBook) throws ParseException {
+    public void execute(InputBook inputBook, OutputBook outputBook, List<OutputBook> outputBooks) throws ParseException {
         if (StringUtils.isNotEmpty(inputBook.getTDim1()) && StringUtils.isNotEmpty(inputBook.getTAmount1())) {
             outputBook.setControlDim1(inputBook.getTDim1());
             int dueAmount1;
@@ -22,9 +23,11 @@ public class XCheckPeWithoutThresholdCalc implements ICalculation {
             }
             //int dueAmount1 = Integer.parseInt(inputBook.getTAmount1());
             outputBook.setDueAmount1(String.valueOf(dueAmount1));
+            outputBooks.add(outputBook);
 
             if (StringUtils.isNotEmpty(inputBook.getTDim2()) && StringUtils.isNotEmpty(inputBook.getTAmount2())) {
-                outputBook.setControlDim2(inputBook.getTDim2());
+                OutputBook newOutputBook = outputBook.clone();
+                newOutputBook.setControlDim1(inputBook.getTDim2());
                 int dueAmount2;
                 if("C".equalsIgnoreCase(inputBook.getTDim2()) || "AC".equalsIgnoreCase(inputBook.getTDim2())) {
                     dueAmount2 =  Integer.parseInt(inputBook.getCycles());
@@ -32,64 +35,52 @@ public class XCheckPeWithoutThresholdCalc implements ICalculation {
                     dueAmount2 =  Integer.parseInt(inputBook.getHours());
                 }
 //                int dueAmount2 = Integer.parseInt(inputBook.getTAmount2());
-                outputBook.setDueAmount2(String.valueOf(dueAmount2));
+                newOutputBook.setDueAmount1(String.valueOf(dueAmount2));
+                outputBooks.add(newOutputBook);
 
                 if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3())) {
-                    outputBook.setControlDim3(inputBook.getTDim3());
+                    OutputBook outputBook1 = outputBook.clone();
+                    outputBook1.setControlDim1(inputBook.getTDim3());
                     String dueAmount3 = getDueDate(inputBook);
-                    outputBook.setDueAmount3(dueAmount3);
+                    outputBook1.setDueAmount1(dueAmount3);
+                    outputBooks.add(outputBook1);
                 }
             } else if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3())) {
-                outputBook.setControlDim2(inputBook.getTDim3());
+                OutputBook outputBook1 = outputBook.clone();
+                outputBook1.setControlDim1(inputBook.getTDim3());
                 String dueAmount3 = getDueDate(inputBook);
-                outputBook.setDueAmount2(dueAmount3);
+                outputBook1.setDueAmount1(dueAmount3);
+                outputBooks.add(outputBook1);
             }
         } else if (StringUtils.isNotEmpty(inputBook.getTDim2()) && StringUtils.isNotEmpty(inputBook.getTAmount2())) {
-            outputBook.setControlDim1(inputBook.getTDim2());
+            OutputBook outputBook1 = outputBook.clone();
+            outputBook1.setControlDim1(inputBook.getTDim2());
             int dueAmount2;
             if("C".equalsIgnoreCase(inputBook.getTDim2()) || "AC".equalsIgnoreCase(inputBook.getTDim2())) {
                 dueAmount2 =  Integer.parseInt(inputBook.getCycles());
             } else {
                 dueAmount2 =  Integer.parseInt(inputBook.getHours());
             }
-            outputBook.setDueAmount1(String.valueOf(dueAmount2));
+            outputBook1.setDueAmount1(String.valueOf(dueAmount2));
+            outputBooks.add(outputBook1);
 
             if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3())) {
-                outputBook.setControlDim2(inputBook.getTDim3());
+                OutputBook outputBook2 = outputBook.clone();
+                outputBook2.setControlDim1(inputBook.getTDim3());
                 String dueAmount3 = getDueDate(inputBook);
-                outputBook.setDueAmount2(dueAmount3);
+                outputBook2.setDueAmount1(dueAmount3);
+                outputBooks.add(outputBook2);
             }
         } else if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3())) {
-            outputBook.setControlDim1(inputBook.getTDim3());
+            OutputBook outputBook1 = outputBook.clone();
+            outputBook1.setControlDim1(inputBook.getTDim3());
 
             String dueAmount1 = getDueDate(inputBook);
-            outputBook.setDueAmount1(dueAmount1);
+            outputBook1.setDueAmount1(dueAmount1);
+            outputBooks.add(outputBook1);
         }
     }
 
-    /*private String getDueDate(InputBook inputBook) throws ParseException {
-        if ("DT".equalsIgnoreCase(inputBook.getTDim3().trim()))
-            return inputBook.getTAmount3();
-
-        String tDim3 = inputBook.getTDim3().trim();
-        int tAmount3 = Integer.parseInt(inputBook.getTAmount3());
-        String dueAmount3 = "";
-
-        if ("E".equalsIgnoreCase(inputBook.getThrBase().trim()))
-            dueAmount3 = addToCalender(inputBook.getE(), tAmount3, tDim3);
-        else if ("M".equalsIgnoreCase(inputBook.getThrBase().trim()))
-            dueAmount3 = addToCalender(inputBook.getM(), tAmount3, tDim3);
-        else if ("D".equalsIgnoreCase(inputBook.getThrBase().trim()))
-            dueAmount3 = addToCalender(inputBook.getD(), tAmount3, tDim3);
-        else if ("I".equalsIgnoreCase(inputBook.getThrBase().trim()))
-            dueAmount3 = addToCalender(inputBook.getI(), tAmount3, tDim3);
-        else if ("S".equalsIgnoreCase(inputBook.getThrBase().trim()))
-            dueAmount3 = addToCalender(inputBook.getS(), tAmount3, tDim3);
-        else if ("V".equalsIgnoreCase(inputBook.getThrBase().trim()))
-            dueAmount3 = addToCalender(inputBook.getV(), tAmount3, tDim3);
-
-        return dueAmount3;
-    }*/
 
     private String getDueDate(InputBook inputBook) throws ParseException {
         if ("DT".equalsIgnoreCase(inputBook.getTDim3().trim()))

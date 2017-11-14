@@ -3,7 +3,7 @@ package com.spicejet.xcheckpe.model;
 import lombok.Data;
 
 @Data
-public class OutputBook {
+public class OutputBook implements  Cloneable{
 
     private String tempA;
     private String tempB;
@@ -119,21 +119,6 @@ public class OutputBook {
         this.dueAmount1 = dueAmount1;
     }
 
-    public void setControlDim2(String controlDim2) {
-        this.controlDim2 = controlDim2;
-    }
-
-    public void setDueAmount2(String dueAmount2) {
-        this.dueAmount2 = dueAmount2;
-    }
-
-    public void setControlDim3(String controlDim3) {
-        this.controlDim3 = controlDim3;
-    }
-
-    public void setDueAmount3(String dueAmount3) {
-        this.dueAmount3 = dueAmount3;
-    }
 
     public boolean equals(Object o) {
         if(o == this) {
@@ -341,18 +326,19 @@ public class OutputBook {
         result1 = result1 * 59 + ($controlDim1 == null?43:$controlDim1.hashCode());
         String $dueAmount1 = this.getDueAmount1();
         result1 = result1 * 59 + ($dueAmount1 == null?43:$dueAmount1.hashCode());
-        String $controlDim2 = this.getControlDim2();
-        result1 = result1 * 59 + ($controlDim2 == null?43:$controlDim2.hashCode());
-        String $dueAmount2 = this.getDueAmount2();
-        result1 = result1 * 59 + ($dueAmount2 == null?43:$dueAmount2.hashCode());
-        String $controlDim3 = this.getControlDim3();
-        result1 = result1 * 59 + ($controlDim3 == null?43:$controlDim3.hashCode());
-        String $dueAmount3 = this.getDueAmount3();
-        result1 = result1 * 59 + ($dueAmount3 == null?43:$dueAmount3.hashCode());
         return result1;
     }
 
     public String toString() {
-        return "OutputBook(tempA=" + this.getTempA() + ", tempB=" + this.getTempB() + ", tempC=" + this.getTempC() + ", tempD=" + this.getTempD() + ", tempE=" + this.getTempE() + ", tempF=" + this.getTempF() + ", checkType=" + this.getCheckType() + ", aircraft=" + this.getAircraft() + ", controlDim1=" + this.getControlDim1() + ", dueAmount1=" + this.getDueAmount1() + ", controlDim2=" + this.getControlDim2() + ", dueAmount2=" + this.getDueAmount2() + ", controlDim3=" + this.getControlDim3() + ", dueAmount3=" + this.getDueAmount3() + ")";
+        return "OutputBook(tempA=" + this.getTempA() + ", tempB=" + this.getTempB() + ", tempC=" + this.getTempC() + ", tempD=" + this.getTempD() + ", tempE=" + this.getTempE() + ", tempF=" + this.getTempF() + ", checkType=" + this.getCheckType() + ", aircraft=" + this.getAircraft() + ", controlDim1=" + this.getControlDim1() + ", dueAmount1=" + this.getDueAmount1() + ")";
+    }
+
+    public OutputBook clone() {
+        try {
+            return (OutputBook) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 }

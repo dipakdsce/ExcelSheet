@@ -38,9 +38,9 @@ public class XCheckPeCalculation {
 
                     ICalculation calculation = isThresholdUsed().test(inputBook) ? new XCheckPeWithThresholdCal()
                             : new XCheckPeWithoutThresholdCalc();
-                    calculation.execute(inputBook, outputBook);
+                    calculation.execute(inputBook, outputBook,outputBooks);
 
-                    outputBooks.add(outputBook);
+                    //outputBooks.add(outputBook);
                 } catch (ParseException e) {
                     e.printStackTrace();
                     throw new DataException("Found error in row number " + inputBook.getRowCount());

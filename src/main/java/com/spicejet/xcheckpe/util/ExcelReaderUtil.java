@@ -28,10 +28,6 @@ public class ExcelReaderUtil {
         header.setAircraft("AIRCRAFT");
         header.setControlDim1("CONTROL-DIM-1");
         header.setDueAmount1("DUE-AMOUNT-1");
-        header.setControlDim2("CONTROL-DIM-2");
-        header.setDueAmount2("DUE-AMOUNT-2");
-        header.setControlDim3("CONTROL-DIM-3");
-        header.setDueAmount3("DUE-AMOUNT-3");
 
         outputBooks.add(0, header);
     }
@@ -61,14 +57,7 @@ public class ExcelReaderUtil {
         cell.setCellValue(book.getControlDim1());
         cell = row.createCell(colNum++);
         cell.setCellValue(book.getDueAmount1());
-        cell = row.createCell(colNum++);
-        cell.setCellValue(book.getControlDim2());
-        cell = row.createCell(colNum++);
-        cell.setCellValue(book.getDueAmount2());
-        cell = row.createCell(colNum++);
-        cell.setCellValue(book.getControlDim3());
-        cell = row.createCell(colNum++);
-        cell.setCellValue(book.getDueAmount3());
+
 
         return num;
     }
