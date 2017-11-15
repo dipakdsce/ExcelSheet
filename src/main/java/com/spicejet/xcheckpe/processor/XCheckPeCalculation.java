@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 import static com.spicejet.xcheckpe.util.CustomStringUtils.isNonBlank;
 
 public class XCheckPeCalculation {
+    boolean flag;
 
     private static Predicate<InputBook> isThresholdUsed() {
         return inputBook -> isNonBlank.test(inputBook.getThresholdUsed())
@@ -38,9 +39,11 @@ public class XCheckPeCalculation {
 
                     ICalculation calculation = isThresholdUsed().test(inputBook) ? new XCheckPeWithThresholdCal()
                             : new XCheckPeWithoutThresholdCalc();
-                    calculation.execute(inputBook, outputBook);
+                    flag = calculation.execute(inputBook, outputBook);
+                    if(flag) {
+                        outputBooks.add(outputBook);
+                    }
 
-                    outputBooks.add(outputBook);
                 } catch (ParseException e) {
                     e.printStackTrace();
                     throw new DataException("Found error in row number " + inputBook.getRowCount());

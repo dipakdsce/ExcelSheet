@@ -11,8 +11,10 @@ import static com.spicejet.xcheckpe.util.CommonUtil.addToCalender;
 public class XCheckPeWithoutThresholdCalc implements ICalculation {
 
     @Override
-    public void execute(InputBook inputBook, OutputBook outputBook) throws ParseException {
+    public boolean execute(InputBook inputBook, OutputBook outputBook) throws ParseException {
+        boolean flag = false;
         if (StringUtils.isNotEmpty(inputBook.getTDim1()) && StringUtils.isNotEmpty(inputBook.getTAmount1())) {
+            flag = true;
             outputBook.setControlDim1(inputBook.getTDim1());
             int dueAmount1;
             if("C".equalsIgnoreCase(inputBook.getTDim1()) || "AC".equalsIgnoreCase(inputBook.getTDim1())) {
@@ -45,6 +47,7 @@ public class XCheckPeWithoutThresholdCalc implements ICalculation {
                 outputBook.setDueAmount2(dueAmount3);
             }
         } else if (StringUtils.isNotEmpty(inputBook.getTDim2()) && StringUtils.isNotEmpty(inputBook.getTAmount2())) {
+            flag = true;
             outputBook.setControlDim1(inputBook.getTDim2());
             int dueAmount2;
             if("C".equalsIgnoreCase(inputBook.getTDim2()) || "AC".equalsIgnoreCase(inputBook.getTDim2())) {
@@ -60,11 +63,14 @@ public class XCheckPeWithoutThresholdCalc implements ICalculation {
                 outputBook.setDueAmount2(dueAmount3);
             }
         } else if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3())) {
+            flag = true;
             outputBook.setControlDim1(inputBook.getTDim3());
 
             String dueAmount1 = getDueDate(inputBook);
             outputBook.setDueAmount1(dueAmount1);
         }
+
+        return flag;
     }
 
     /*private String getDueDate(InputBook inputBook) throws ParseException {

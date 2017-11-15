@@ -7,5 +7,5 @@ import java.text.ParseException;
 
 public interface ICalculation {
 
-    void execute(InputBook inputBook, OutputBook outputBook) throws ParseException;
+    boolean execute(InputBook inputBook, OutputBook outputBook) throws ParseException;
 }
