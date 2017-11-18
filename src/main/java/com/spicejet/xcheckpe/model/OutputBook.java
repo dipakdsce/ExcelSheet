@@ -13,6 +13,7 @@ public class OutputBook implements  Cloneable{
     private String tempF;
     private String checkType;
     private String aircraft;
+    private String thresholdUsed;
     private String controlDim1;
     private String dueAmount1;
     private String controlDim2;
@@ -53,6 +54,10 @@ public class OutputBook implements  Cloneable{
 
     public String getAircraft() {
         return this.aircraft;
+    }
+
+    public String getThresholdUsed() {
+        return  this.thresholdUsed;
     }
 
     public String getControlDim1() {
@@ -109,6 +114,10 @@ public class OutputBook implements  Cloneable{
 
     public void setAircraft(String aircraft) {
         this.aircraft = aircraft;
+    }
+
+    public void setThresholdUsed(String thresholdUsed) {
+        this.thresholdUsed = thresholdUsed;
     }
 
     public void setControlDim1(String controlDim1) {
@@ -226,6 +235,20 @@ public class OutputBook implements  Cloneable{
                     return false;
                 }
 
+                label135: {
+                    String this$thresholdUsed = this.getThresholdUsed();
+                    String other$thresholdUsed = this.getThresholdUsed();
+                    if(this$thresholdUsed == null) {
+                        if(other$thresholdUsed == null) {
+                            break label135;
+                        }
+                    } else if (this$thresholdUsed.equals(other$thresholdUsed)) {
+                        break label135;
+                    }
+
+                    return  false;
+                }
+
                 String this$controlDim1 = this.getControlDim1();
                 String other$controlDim1 = other.getControlDim1();
                 if(this$controlDim1 == null) {
@@ -322,6 +345,8 @@ public class OutputBook implements  Cloneable{
         result1 = result1 * 59 + ($checkType == null?43:$checkType.hashCode());
         String $aircraft = this.getAircraft();
         result1 = result1 * 59 + ($aircraft == null?43:$aircraft.hashCode());
+        String $thresholdUsed = this.getThresholdUsed();
+        result1 = result1 * 59 + ($thresholdUsed == null?43:$thresholdUsed.hashCode());
         String $controlDim1 = this.getControlDim1();
         result1 = result1 * 59 + ($controlDim1 == null?43:$controlDim1.hashCode());
         String $dueAmount1 = this.getDueAmount1();
@@ -330,7 +355,7 @@ public class OutputBook implements  Cloneable{
     }
 
     public String toString() {
-        return "OutputBook(tempA=" + this.getTempA() + ", tempB=" + this.getTempB() + ", tempC=" + this.getTempC() + ", tempD=" + this.getTempD() + ", tempE=" + this.getTempE() + ", tempF=" + this.getTempF() + ", checkType=" + this.getCheckType() + ", aircraft=" + this.getAircraft() + ", controlDim1=" + this.getControlDim1() + ", dueAmount1=" + this.getDueAmount1() + ")";
+        return "OutputBook(tempA=" + this.getTempA() + ", tempB=" + this.getTempB() + ", tempC=" + this.getTempC() + ", tempD=" + this.getTempD() + ", tempE=" + this.getTempE() + ", tempF=" + this.getTempF() + ", checkType=" + this.getCheckType() + ", aircraft=" + this.getAircraft() + ", thresholdUsed=" + this.getThresholdUsed() + ", controlDim1=" + this.getControlDim1() + ", dueAmount1=" + this.getDueAmount1() + ")";
     }
 
     public OutputBook clone() {
