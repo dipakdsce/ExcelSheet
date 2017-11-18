@@ -36,6 +36,7 @@ public class XCheckPeCalculation {
                     outputBook.setTempF(inputBook.getTempF());
                     outputBook.setCheckType(inputBook.getCheckName());
                     outputBook.setAircraft(inputBook.getAircraft());
+                    outputBook.setThresholdUsed(inputBook.getThresholdUsed());
 
                     ICalculation calculation = isThresholdUsed().test(inputBook) ? new XCheckPeWithThresholdCal()
                             : new XCheckPeWithoutThresholdCalc();

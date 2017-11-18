@@ -26,6 +26,7 @@ public class ExcelReaderUtil {
         header.setTempF("Temp F");
         header.setCheckType("CHECK-TYPE");
         header.setAircraft("AIRCRAFT");
+        header.setThresholdUsed("THRESHOLD-USED");
         header.setControlDim1("CONTROL-DIM-1");
         header.setDueAmount1("DUE-AMOUNT-1");
         header.setControlDim2("CONTROL-DIM-2");
@@ -57,6 +58,8 @@ public class ExcelReaderUtil {
         cell.setCellValue(book.getCheckType());
         cell = row.createCell(colNum++);
         cell.setCellValue(book.getAircraft());
+        cell = row.createCell(colNum++);
+        cell.setCellValue(book.getThresholdUsed());
         cell = row.createCell(colNum++);
         cell.setCellValue(book.getControlDim1());
         cell = row.createCell(colNum++);
