@@ -35,7 +35,13 @@ public class XCheckPeFileWriter {
         if(!dir.exists()) {
             dir.mkdir();
         }
-        String outputExcelFilePath = Constants.OUTPUT_DIR + Constants.SEPARATOR + fileName;
+
+        int index = fileName.lastIndexOf('.');
+
+        String baseName  =  fileName.substring(0, index);
+        String outputExcelFilePath = Constants.OUTPUT_DIR + Constants.SEPARATOR + baseName + "_output" + Constants.EXCEL_FILE_TYPE;
+
+//        String outputExcelFilePath = Constants.OUTPUT_DIR + Constants.SEPARATOR + fileName;
 
         File f =  new File(outputExcelFilePath);
 
