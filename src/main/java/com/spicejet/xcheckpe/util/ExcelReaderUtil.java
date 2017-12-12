@@ -39,27 +39,27 @@ public class ExcelReaderUtil {
         int colNum = 0;
 
         Cell cell = row.createCell(colNum++);
-        cell.setCellValue(book.getTempA());
+        cell.setCellValue(book.getTempA() != null ? book.getTempA().trim() : book.getTempA());
         cell = row.createCell(colNum++);
-        cell.setCellValue(book.getTempB());
+        cell.setCellValue(book.getTempB() != null ? book.getTempB().trim() : book.getTempB());
         cell = row.createCell(colNum++);
-        cell.setCellValue(book.getTempC());
+        cell.setCellValue(book.getTempC() != null ? book.getTempC().trim() : book.getTempC());
         cell = row.createCell(colNum++);
-        cell.setCellValue(book.getTempD());
+        cell.setCellValue(book.getTempD() != null ? book.getTempD().trim() : book.getTempD());
         cell = row.createCell(colNum++);
-        cell.setCellValue(book.getTempE());
+        cell.setCellValue(book.getTempE() != null ? book.getTempE().trim() : book.getTempE());
         cell = row.createCell(colNum++);
-        cell.setCellValue(book.getTempF());
+        cell.setCellValue(book.getTempF() != null ? book.getTempF().trim() : book.getTempF());
         cell = row.createCell(colNum++);
         cell.setCellValue(book.getCheckType());
         cell = row.createCell(colNum++);
         cell.setCellValue(book.getAircraft());
         cell = row.createCell(colNum++);
-        cell.setCellValue(book.getThresholdUsed());
+        cell.setCellValue(book.getThresholdUsed() != null ? book.getThresholdUsed().trim() : book.getThresholdUsed());
         cell = row.createCell(colNum++);
-        cell.setCellValue(book.getControlDim1());
+        cell.setCellValue(book.getControlDim1() != null ? book.getControlDim1().trim() : book.getControlDim1());
         cell = row.createCell(colNum++);
-        cell.setCellValue(book.getDueAmount1());
+        cell.setCellValue(book.getDueAmount1() != null ? book.getDueAmount1().trim() : book.getDueAmount1());
 
 
         return num;
@@ -98,103 +98,103 @@ public class ExcelReaderUtil {
         int columnIndex = nextCell.getColumnIndex();
         switch (columnIndex) {
             case ZERO_INDEX:
-                inputBook.setTempA(getCellValue(nextCell));
+                inputBook.setTempA(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 1:
-                inputBook.setTempB(getCellValue(nextCell));
+                inputBook.setTempB(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 2:
-                inputBook.setTempC(getCellValue(nextCell));
+                inputBook.setTempC(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 3:
-                inputBook.setTempD(getCellValue(nextCell));
+                inputBook.setTempD(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 4:
-                inputBook.setTempE(getCellValue(nextCell));
+                inputBook.setTempE(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 5:
-                inputBook.setTempF(getCellValue(nextCell));
+                inputBook.setTempF(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 6:
-                inputBook.setCheckName(getCellValue(nextCell));
+                inputBook.setCheckName(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 7:
-                inputBook.setAircraft(getCellValue(nextCell));
+                inputBook.setAircraft(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 8:
-                inputBook.setThresholdUsed(getCellValue(nextCell));
+                inputBook.setThresholdUsed(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 9:
-                inputBook.setHours(getCellValue(nextCell));
+                inputBook.setHours(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 10:
-                inputBook.setCycles(getCellValue(nextCell));
+                inputBook.setCycles(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 11:
-                inputBook.setDate(getCellValue(nextCell));
+                inputBook.setDate(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 12:
-                inputBook.setE(getCellValue(nextCell));
+                inputBook.setE(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 13:
-                inputBook.setM(getCellValue(nextCell));
+                inputBook.setM(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 14:
-                inputBook.setD(getCellValue(nextCell));
+                inputBook.setD(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 15:
-                inputBook.setI(getCellValue(nextCell));
+                inputBook.setI(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 16:
-                inputBook.setS(getCellValue(nextCell));
+                inputBook.setS(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 17:
-                inputBook.setV(getCellValue(nextCell));
+                inputBook.setV(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 18:
-                inputBook.setThrBase(getCellValue(nextCell));
+                inputBook.setThrBase(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 19:
-                inputBook.setThrBaseDim(getCellValue(nextCell));
+                inputBook.setThrBaseDim(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 20:
-                inputBook.setThrBaseAmount(getCellValue(nextCell));
+                inputBook.setThrBaseAmount(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 21:
-                inputBook.setTDim1(getCellValue(nextCell));
+                inputBook.setTDim1(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 22:
-                inputBook.setTAmount1(getCellValue(nextCell));
+                inputBook.setTAmount1(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 23:
-                inputBook.setTDim2(getCellValue(nextCell));
+                inputBook.setTDim2(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 24:
-                inputBook.setTAmount2(getCellValue(nextCell));
+                inputBook.setTAmount2(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 25:
-                inputBook.setTDim3(getCellValue(nextCell));
+                inputBook.setTDim3(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 26:
-                inputBook.setTAmount3(getCellValue(nextCell));
+                inputBook.setTAmount3(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 27:
-                inputBook.setIDim1(getCellValue(nextCell));
+                inputBook.setIDim1(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 28:
-                inputBook.setIAmount1(getCellValue(nextCell));
+                inputBook.setIAmount1(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 29:
-                inputBook.setIDim2(getCellValue(nextCell));
+                inputBook.setIDim2(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 30:
-                inputBook.setIAmount2(getCellValue(nextCell));
+                inputBook.setIAmount2(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 31:
-                inputBook.setIDim3(getCellValue(nextCell));
+                inputBook.setIDim3(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             case 32:
-                inputBook.setIAmount3(getCellValue(nextCell));
+                inputBook.setIAmount3(getCellValue(nextCell) != null ? getCellValue(nextCell).trim() : null);
                 break;
             default:
                 // do nothing
