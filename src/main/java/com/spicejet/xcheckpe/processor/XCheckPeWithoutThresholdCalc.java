@@ -13,61 +13,137 @@ public class XCheckPeWithoutThresholdCalc implements ICalculation {
     @Override
     public boolean execute(InputBook inputBook, OutputBook outputBook) throws ParseException {
         boolean flag = false;
-        if (StringUtils.isNotEmpty(inputBook.getTDim1()) && StringUtils.isNotEmpty(inputBook.getTAmount1())) {
+        if ((StringUtils.isNotEmpty(inputBook.getHours()) && StringUtils.isNotEmpty(inputBook.getTAmount1())) && ("H".equalsIgnoreCase(inputBook.getTDim1().trim()) || "AH".equalsIgnoreCase(inputBook.getTDim1().trim()))) {
             flag = true;
-            outputBook.setControlDim1(inputBook.getTDim1());
-            int dueAmount1;
-            if("C".equalsIgnoreCase(inputBook.getTDim1()) || "AC".equalsIgnoreCase(inputBook.getTDim1())) {
-                dueAmount1 =  Integer.parseInt(inputBook.getCycles());
-            } else {
-                dueAmount1 =  Integer.parseInt(inputBook.getHours());
-            }
-            //int dueAmount1 = Integer.parseInt(inputBook.getTAmount1());
-            outputBook.setDueAmount1(String.valueOf(dueAmount1));
 
-            if (StringUtils.isNotEmpty(inputBook.getTDim2()) && StringUtils.isNotEmpty(inputBook.getTAmount2())) {
-                outputBook.setControlDim2(inputBook.getTDim2());
-                int dueAmount2;
-                if("C".equalsIgnoreCase(inputBook.getTDim2()) || "AC".equalsIgnoreCase(inputBook.getTDim2())) {
-                    dueAmount2 =  Integer.parseInt(inputBook.getCycles());
-                } else {
-                    dueAmount2 =  Integer.parseInt(inputBook.getHours());
+            outputBook.setControlDim1(inputBook.getTDim1().trim());
+            int dueAmount1 = Integer.parseInt(inputBook.getHours());
+            outputBook.setDueAmount1(String.valueOf(dueAmount1).trim());
+
+            if (("C".equalsIgnoreCase(inputBook.getTDim2().trim()) || "AC".equalsIgnoreCase(inputBook.getTDim2().trim())) && StringUtils.isNotEmpty(inputBook.getTAmount2())) {
+                outputBook.setControlDim2(inputBook.getTDim2().trim());
+                int dueAmount2 = Integer.parseInt(inputBook.getCycles());
+                outputBook.setDueAmount2(String.valueOf(dueAmount2).trim());
+
+                if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3()) && !("").equals(inputBook.getTDim3())) {
+                    String temp = inputBook.getTDim3();
+                    temp = temp.trim().replaceAll("\\s+", "");
+                    if(!"".equals(temp)) {
+                        outputBook.setControlDim3(inputBook.getTDim3().trim());
+                        String dueAmount3 = getDueDate(inputBook);
+                        outputBook.setDueAmount3(dueAmount3.trim());
+                    }
                 }
-//                int dueAmount2 = Integer.parseInt(inputBook.getTAmount2());
-                outputBook.setDueAmount2(String.valueOf(dueAmount2));
+            } else if ((StringUtils.isNotEmpty(inputBook.getHours()) && StringUtils.isNotEmpty(inputBook.getTAmount2())) && ("H".equalsIgnoreCase(inputBook.getTDim1().trim()) || "AH".equalsIgnoreCase(inputBook.getTDim1().trim()))) {
+                    outputBook.setControlDim2(inputBook.getTDim2().trim());
+                    int dueAmount2 = Integer.parseInt(inputBook.getHours());
+                    outputBook.setDueAmount2(String.valueOf(dueAmount2).trim());
 
-                if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3())) {
-                    outputBook.setControlDim3(inputBook.getTDim3());
+                if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3()) && !("").equals(inputBook.getTDim3())) {
+                    String temp = inputBook.getTDim3();
+                    temp = temp.trim().replaceAll("\\s+", "");
+                    if(!"".equals(temp)) {
+                        outputBook.setControlDim3(inputBook.getTDim3().trim());
+                        String dueAmount3 = getDueDate(inputBook);
+                        outputBook.setDueAmount3(dueAmount3.trim());
+                    }
+                }
+            } else if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3()) && !("").equals(inputBook.getTDim3())) {
+                String temp = inputBook.getTDim3();
+                temp = temp.trim().replaceAll("\\s+", "");
+                if(!"".equals(temp)) {
+                    outputBook.setControlDim2(inputBook.getTDim3().trim());
                     String dueAmount3 = getDueDate(inputBook);
-                    outputBook.setDueAmount3(dueAmount3);
+                    outputBook.setDueAmount2(dueAmount3.trim());
                 }
-            } else if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3())) {
-                outputBook.setControlDim2(inputBook.getTDim3());
-                String dueAmount3 = getDueDate(inputBook);
-                outputBook.setDueAmount2(dueAmount3);
             }
-        } else if (StringUtils.isNotEmpty(inputBook.getTDim2()) && StringUtils.isNotEmpty(inputBook.getTAmount2())) {
+        } else if (StringUtils.isNotEmpty(inputBook.getTAmount1()) && ("C".equalsIgnoreCase(inputBook.getTDim1().trim()) || "AC".equalsIgnoreCase(inputBook.getTDim1().trim()))) {
             flag = true;
-            outputBook.setControlDim1(inputBook.getTDim2());
-            int dueAmount2;
-            if("C".equalsIgnoreCase(inputBook.getTDim2()) || "AC".equalsIgnoreCase(inputBook.getTDim2())) {
-                dueAmount2 =  Integer.parseInt(inputBook.getCycles());
-            } else {
-                dueAmount2 =  Integer.parseInt(inputBook.getHours());
-            }
-            outputBook.setDueAmount1(String.valueOf(dueAmount2));
 
-            if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3())) {
-                outputBook.setControlDim2(inputBook.getTDim3());
-                String dueAmount3 = getDueDate(inputBook);
-                outputBook.setDueAmount2(dueAmount3);
+            outputBook.setControlDim1(inputBook.getTDim1().trim());
+            int dueAmount1 = Integer.parseInt(inputBook.getCycles());
+            outputBook.setDueAmount1(String.valueOf(dueAmount1).trim());
+
+            if (("H".equalsIgnoreCase(inputBook.getTDim2().trim()) || "AH".equalsIgnoreCase(inputBook.getTDim2().trim())) && (StringUtils.isNotEmpty(inputBook.getHours()) && StringUtils.isNotEmpty(inputBook.getTAmount2()))) {
+                outputBook.setControlDim2(inputBook.getTDim2().trim());
+                int dueAmount2 = Integer.parseInt(inputBook.getHours());
+                outputBook.setDueAmount2(String.valueOf(dueAmount2).trim());
+
+                if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3()) && !("").equals(inputBook.getTDim3())) {
+                    String temp = inputBook.getTDim3();
+                    temp = temp.trim().replaceAll("\\s+", "");
+                    if(!"".equals(temp)) {
+                        outputBook.setControlDim3(inputBook.getTDim3().trim());
+                        String dueAmount3 = getDueDate(inputBook);
+                        outputBook.setDueAmount3(dueAmount3.trim());
+                    }
+                }
+            } else if (StringUtils.isNotEmpty(inputBook.getTAmount2()) && ("C".equalsIgnoreCase(inputBook.getTDim2().trim()) || "AC".equalsIgnoreCase(inputBook.getTDim2().trim()))) {
+                outputBook.setControlDim2(inputBook.getTDim2().trim());
+                int dueAmount2 = Integer.parseInt(inputBook.getCycles());
+                outputBook.setDueAmount2(String.valueOf(dueAmount2).trim());
+
+                if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3()) && !("").equals(inputBook.getTDim3())) {
+                    String temp = inputBook.getTDim3();
+                    temp = temp.trim().replaceAll("\\s+", "");
+                    if(!"".equals(temp)) {
+                        outputBook.setControlDim3(inputBook.getTDim3().trim());
+                        String dueAmount3 = getDueDate(inputBook);
+                        outputBook.setDueAmount3(dueAmount3.trim());
+                    }
+                }
+
+
+            } else if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3()) && !("").equals(inputBook.getTDim3())) {
+                String temp = inputBook.getTDim3();
+                temp = temp.trim().replaceAll("\\s+", "");
+                if(!"".equals(temp)) {
+                    outputBook.setControlDim2(inputBook.getTDim3().trim());
+                    String dueAmount3 = getDueDate(inputBook);
+                    outputBook.setDueAmount2(dueAmount3.trim());
+                }
             }
-        } else if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3())) {
+        } else if (StringUtils.isNotEmpty(inputBook.getTAmount2()) && ("C".equalsIgnoreCase(inputBook.getTDim2().trim()) || "AC".equalsIgnoreCase(inputBook.getTDim2().trim()))) {
             flag = true;
-            outputBook.setControlDim1(inputBook.getTDim3());
+            outputBook.setControlDim1(inputBook.getTDim2().trim());
+            int dueAmount2 = Integer.parseInt(inputBook.getCycles());
+            outputBook.setDueAmount1(String.valueOf(dueAmount2).trim());
 
-            String dueAmount1 = getDueDate(inputBook);
-            outputBook.setDueAmount1(dueAmount1);
+            if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3()) && !("").equals(inputBook.getTDim3())) {
+                String temp = inputBook.getTDim3();
+                temp = temp.trim().replaceAll("\\s+", "");
+                if(!"".equals(temp)) {
+                    outputBook.setControlDim2(inputBook.getTDim3().trim());
+                    String dueAmount3 = getDueDate(inputBook);
+                    outputBook.setDueAmount2(dueAmount3.trim());
+                }
+            }
+        } else if ((StringUtils.isNotEmpty(inputBook.getHours()) && StringUtils.isNotEmpty(inputBook.getTAmount2())) && ("H".equalsIgnoreCase(inputBook.getTDim1().trim()) || "AH".equalsIgnoreCase(inputBook.getTDim1().trim()))) {
+            flag = true;
+            outputBook.setControlDim1(inputBook.getTDim2().trim());
+            int dueAmount2 = Integer.parseInt(inputBook.getHours());
+            outputBook.setDueAmount1(String.valueOf(dueAmount2).trim());
+
+            if (StringUtils.isNotEmpty(inputBook.getTDim3()) && StringUtils.isNotEmpty(inputBook.getTAmount3()) && !("").equals(inputBook.getTDim3())) {
+                String temp = inputBook.getTDim3();
+                temp = temp.trim().replaceAll("\\s+", "");
+                if(!"".equals(temp)) {
+                    outputBook.setControlDim2(inputBook.getTDim3().trim());
+                    String dueAmount3 = getDueDate(inputBook);
+                    outputBook.setDueAmount2(dueAmount3.trim());
+                }
+            }
+
+        } else if(StringUtils.isNotEmpty(inputBook.getTDim3())&&StringUtils.isNotEmpty(inputBook.getTAmount3()) && !("").equals(inputBook.getTDim3())) {
+            String temp = inputBook.getTDim3();
+            temp = temp.trim().replaceAll("\\s+", "");
+            if(!"".equals(temp)) {
+                flag = true;
+                outputBook.setControlDim1(inputBook.getTDim3().trim());
+
+                String dueAmount1 = getDueDate(inputBook);
+                outputBook.setDueAmount1(dueAmount1.trim());
+            }
         }
 
         return flag;

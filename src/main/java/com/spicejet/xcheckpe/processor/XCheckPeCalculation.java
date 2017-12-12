@@ -28,12 +28,12 @@ public class XCheckPeCalculation {
                 try {
                     OutputBook outputBook = new OutputBook();
 
-                    outputBook.setTempA(inputBook.getTempA());
-                    outputBook.setTempB(inputBook.getTempB());
-                    outputBook.setTempC(inputBook.getTempC());
-                    outputBook.setTempD(inputBook.getTempD());
-                    outputBook.setTempE(inputBook.getTempE());
-                    outputBook.setTempF(inputBook.getTempF());
+                    outputBook.setTempA(inputBook.getTempA() != null ? inputBook.getTempA().trim() : inputBook.getTempA());
+                    outputBook.setTempB(inputBook.getTempB() != null ? inputBook.getTempB().trim() : inputBook.getTempB());
+                    outputBook.setTempC(inputBook.getTempC() != null ? inputBook.getTempC().trim() : inputBook.getTempC());
+                    outputBook.setTempD(inputBook.getTempD() != null ? inputBook.getTempD().trim() : inputBook.getTempD());
+                    outputBook.setTempE(inputBook.getTempE() != null ? inputBook.getTempE().trim() : (inputBook.getTempE()));
+                    outputBook.setTempF(inputBook.getTempF() != null ? inputBook.getTempF().trim() : inputBook.getTempF());
                     outputBook.setCheckType(inputBook.getCheckName());
                     outputBook.setAircraft(inputBook.getAircraft());
                     outputBook.setThresholdUsed(inputBook.getThresholdUsed());
